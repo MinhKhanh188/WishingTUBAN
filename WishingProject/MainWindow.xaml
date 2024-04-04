@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WishingProject"
         mc:Ignorable="d"
-        Title="Gacha" Height="450" Width="800">
+        Title="Gacha" Height="645" Width="919"
+        Loaded="Window_Loaded">
 
     <Window.Resources>
         <!-- Meteor Animation -->
@@ -16,15 +17,6 @@
                 From="0.0" To="1.0" Duration="0:0:1" />
             <!-- ... (meteor animation logic) -->
         </Storyboard>
-
-        <!-- 3-star Animation -->
-        <MediaElement x:Key="ThreeStarAnimation" Source="C:\Users\Mr.Khanh\Desktop\C#Project\WishingProject\Source_Material\videos\3starwish-single.mp4" LoadedBehavior="Manual" />
-
-        <!-- 4-star Animation -->
-        <MediaElement x:Key="FourStarAnimation" Source="Material/WishingAnimation/Meteor/4starwish.mp4" LoadedBehavior="Manual" />
-
-        <!-- 5-star Animation -->
-        <MediaElement x:Key="FiveStarAnimation" Source="Material/WishingAnimation/Meteor/5starwish-single.mp4" LoadedBehavior="Manual" />
 
     </Window.Resources>
 
@@ -45,7 +37,11 @@
             <TextBlock x:Name="itemDisplay" Text="Obtained Item: Nothing yet!" Margin="0,0,0,20" />
 
             <!-- MediaElement for Video Display -->
-            <MediaElement x:Name="videoDisplay" Width="480" Height="360" />
+            <MediaElement x:Name="mediaElement" 
+                      LoadedBehavior="Manual"
+                      Stretch="UniformToFill"
+                      Width="480" Height="360" />
+            
 
             <!-- Pull Button -->
             <Button Content="Ước nguyện" Width="120" Height="40" Click="PullButton_Click"/>

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -31,6 +33,11 @@ namespace WishingProject
             gachaSystem = new GachaSystem();
         }
 
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            DataContext = this; // Set DataContext to the MainWindow instance
+        }
+
         private void PullButton_Click(object sender, RoutedEventArgs e)
         {
             // Trigger the meteor animation
@@ -43,47 +50,17 @@ namespace WishingProject
             itemDisplay.Text = $"Obtained Item: {obtainedItem.Name} (Rarity: {obtainedItem.ItemRarity})";
 
             // Play the corresponding animation based on rarity
-            PlayRarityAnimation(rarity);
+            PlayRarityAnimation();
         }
+        public string CurrentVideoSource { get; set; }
 
-
-
-        private void PlayRarityAnimation(Rarity rarity)
+        private void PlayRarityAnimation()
         {
-            Debug.WriteLine($"Playing {rarity} video.");
-            //MediaElement videoElement = (MediaElement)Resources[$"{rarity}Animation"];
-            
-                videoDisplay.LoadedBehavior = MediaState.Manual;
+                CurrentVideoSource = "Material/WishingAnimation/Meteor/5starwish-single.mp4";
+            mediaElement.Source = new Uri(CurrentVideoSource, UriKind.RelativeOrAbsolute);
+            mediaElement.Play();
 
-                // Stop any currently playing video
-                videoDisplay.Stop();
-
-                // Set the source of the video display
-                videoDisplay.Source = new Uri($"pack://application:,,,/Material/WishingAnimation/Meteor/4starwish.mp4");
-
-                // Play the video
-                videoDisplay.Play();
-            
         }
-
-
-        private void StopAllVideos()
-        {
-            // Stop all rarity videos
-            StopVideo("ThreeStarAnimation");
-            StopVideo("FourStarAnimation");
-            StopVideo("FiveStarAnimation");
-        }
-
-        private void StopVideo(string videoKey)
-        {
-            MediaElement videoElement = (MediaElement)Resources[videoKey];
-            if (videoElement != null)
-            {
-                videoElement.Stop();
-            }
-        }
-
 
         private void PlayAnimation(string animationKey)
         {
